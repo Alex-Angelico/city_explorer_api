@@ -86,8 +86,8 @@ Number and name of feature: Errors
 
 Estimate of time needed to complete: 1 hour
 
-Start time: 3:45s
+Start time: 3:45
 
-Finish time: _____
+Finish time: 3:57
 
-Actual time needed to complete: _____
+Actual time needed to complete: 12 minutes
