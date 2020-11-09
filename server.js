@@ -34,7 +34,7 @@ function handleWeather(req, res) {
     array.forEach(object => {
       Weather.all.push(new Weather(object));
     })
-    res.send(rawWeatherData.city_name, Weather.all);
+    res.send(Weather.all);
   } catch(error){
     console.error(error);
   }
