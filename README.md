@@ -58,35 +58,35 @@ Actual time needed to complete: 1.5 hours
 
 ### Feature 2
 
-Number and name of feature: ________________________________
+Number and name of feature: Locations
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1 hour
 
-Start time: _____
+Start time: 1:35
 
-Finish time: _____
+Finish time: 2:35
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1 hour
 
 ### Feature 3
 
-Number and name of feature: ________________________________
+Number and name of feature: Weather
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1.5 hour
 
-Start time: _____
+Start time: 2:40
 
-Finish time: _____
+Finish time: 3:15
 
-Actual time needed to complete: _____
+Actual time needed to complete: 35 minutes
 
 ### Feature 4
 
-Number and name of feature: ________________________________
+Number and name of feature: Errors
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1 hour
 
-Start time: _____
+Start time: 3:45s
 
 Finish time: _____
 
