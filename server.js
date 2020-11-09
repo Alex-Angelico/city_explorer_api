@@ -44,11 +44,14 @@ function Location(city, rawLocationData) {
 
 function Weather(city, rawWeatherData) {
   let array = rawWeatherData.data;
+  let formattedWeatherData = [];
   array.forEach(object => {
+    this.dataHolder = [];
     this.rawDataSearchQuery = city;
     this.formattedSearchQuery = object.city_name;
-    this.forecast = object.weather.description;
-    this.time = object.datetime;
+    this.forecast = dataHolder.push(object.weather.description);
+    this.time = dataHolder.push(object.datetime);
+    formattedWeatherData.push(dataHolder);
 
   })
   
