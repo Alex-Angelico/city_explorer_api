@@ -2,11 +2,10 @@
 
 require('dotenv').config();
 
-// 3rd party dependencies
+
 const express = require('express');
 const cors = require('cors');
 
-// application constants
 const app = express();
 const PORT = process.env.PORT;
 
@@ -50,12 +49,14 @@ function Location(city, rawLocationData) {
 function Weather(object) {
     this.forecast = object.weather.description;
     this.time = object.datetime;
-  
-
 }
 
 app.get('/location', handleLocation);
 app.get('/weather', handleWeather);
+
+app.use('*', (req, res) => {
+	res.status(500).send('Sorry, something went wrong!');
+})
 
 app.listen(PORT, () => {
   console.log(`server up on port ${PORT}`);
