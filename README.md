@@ -36,10 +36,7 @@ Problem Domain: People need easy access to information about cities they are vis
 
 ## Change Log
 
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an examples:
-Alex Angelico + Jordan Kidwell 20200911: Created base files and repository.
-
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource.
+Alex Angelico + Jordan Kidwell 20200911: Created base files and repository. Linked to Heroku.
 
 ## Credits and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
@@ -55,9 +52,9 @@ Estimate of time needed to complete: 1 hour
 
 Start time: 1125
 
-Finish time: _____
+Finish time: 1255
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1.5 hours
 
 ### Feature 2
 
