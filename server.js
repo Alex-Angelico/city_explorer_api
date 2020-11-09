@@ -24,16 +24,7 @@ function handleLocation(req, res) {
     console.error(error);
   }
 }
-// function handleWeather(req, res) {
-//   try {
-//     let rawWeatherData = require('./data/weather.json');
-//     let city = req.query.city;
-//     let weatherData = new Weather(city, rawWeatherData);
-//     res.send(weatherData);
-//   } catch(error){
-//     console.error(error);
-//   }
-// }
+
 function handleWeather(req, res) {
   try {
     let rawWeatherData = require('./data/weather.json');
@@ -43,7 +34,7 @@ function handleWeather(req, res) {
     array.forEach(object => {
       Weather.all.push(new Weather(object));
     })
-    res.send(Weather.all);
+    res.send(rawWeatherData.city_name, Weather.all);
   } catch(error){
     console.error(error);
   }
@@ -57,12 +48,9 @@ function Location(city, rawLocationData) {
 }
 
 function Weather(object) {
-    // this.dataHolder = [];
-    // this.rawDataSearchQuery = city;
-    // this.formattedSearchQuery = object.city_name;
     this.forecast = object.weather.description;
     this.time = object.datetime;
-  //   formattedWeatherData.push(dataHolder);
+  
 
 }
 
