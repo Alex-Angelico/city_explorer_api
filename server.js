@@ -33,9 +33,9 @@ function handleWeather(req, res) {
     array.forEach(object => {
       Weather.all.push(new Weather(object));
     })
-    let weatherReport = `${city}${Weather.all}`;
-    // res.send(Weather.all);
-    res.send(weatherReport);
+    // let weatherReport = `${city}${Weather.all}`;
+    res.send(Weather.all);
+    // res.send(weatherReport);
   } catch (error) {
     console.error(error);
   }
