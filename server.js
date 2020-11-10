@@ -19,7 +19,7 @@ function handleLocation(req, res) {
     let city = req.query.city;
     let locationData = new Location(city, rawLocationData);
     res.send(locationData);
-  } catch(error){
+  } catch (error) {
     console.error(error);
   }
 }
@@ -27,14 +27,16 @@ function handleLocation(req, res) {
 function handleWeather(req, res) {
   try {
     let rawWeatherData = require('./data/weather.json');
-    let city = req.query.city;
+    let city = `${req.query.city} 5-day:`;
     let array = rawWeatherData.data;
     Weather.all = [];
     array.forEach(object => {
       Weather.all.push(new Weather(object));
     })
-    res.send(Weather.all);
-  } catch(error){
+    let weatherReport = `${city}${Weather.all}`;
+    // res.send(Weather.all);
+    res.send(weatherReport);
+  } catch (error) {
     console.error(error);
   }
 }
@@ -47,15 +49,15 @@ function Location(city, rawLocationData) {
 }
 
 function Weather(object) {
-    this.forecast = object.weather.description;
-    this.time = object.datetime;
+  this.forecast = object.weather.description;
+  this.time = object.datetime;
 }
 
 app.get('/location', handleLocation);
 app.get('/weather', handleWeather);
 
 app.use('*', (req, res) => {
-	res.status(500).send('Sorry, something went wrong!');
+  res.status(500).send('Sorry, something went wrong!');
 })
 
 app.listen(PORT, () => {
