@@ -44,7 +44,9 @@ Alex Angelico + Jordan Kidwell 20200911: Created base files and repository. Link
 
 ## Development Timeline
 
-### Feature 1
+### Lab 6
+
+#### Feature 1
 
 Number and name of feature: Respository Setup
 
@@ -56,7 +58,7 @@ Finish time: 1255
 
 Actual time needed to complete: 1.5 hours
 
-### Feature 2
+#### Feature 2
 
 Number and name of feature: Locations
 
@@ -68,7 +70,7 @@ Finish time: 2:35
 
 Actual time needed to complete: 1 hour
 
-### Feature 3
+#### Feature 3
 
 Number and name of feature: Weather
 
@@ -80,7 +82,7 @@ Finish time: 3:15
 
 Actual time needed to complete: 35 minutes
 
-### Feature 4
+#### Feature 4
 
 Number and name of feature: Errors
 
@@ -91,3 +93,53 @@ Start time: 3:45
 Finish time: 3:57
 
 Actual time needed to complete: 12 minutes
+
+### Lab 7
+
+#### Feature 5
+
+Number and name of feature: Data Formatting
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 2:30
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
+#### Feature 6
+
+Number and name of feature: Locations
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
+#### Feature 7
+
+Number and name of feature: Weather
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
+#### Feature 8
+
+Number and name of feature: Trails
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
