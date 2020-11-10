@@ -29,10 +29,12 @@ function handleWeather(req, res) {
     let rawWeatherData = require('./data/weather.json');
     let city = `${req.query.city} 5-day:`;
     let array = rawWeatherData.data;
-    Weather.all = [];
-    array.forEach(object => {
-      Weather.all.push(new Weather(object));
-    })
+    // Weather.all = [];
+    Weather.all = array.map(object => new Weather(object));
+    // array.forEach(object => {
+    //   Weather.all.push(new Weather(object));
+    // })
+    // let formattedWeatherData = Weather.all.map(value => console.log(value))
     // let weatherReport = `${city}${Weather.all}`;
     res.send(Weather.all);
     // res.send(weatherReport);
