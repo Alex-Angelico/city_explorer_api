@@ -24,18 +24,35 @@ function handleLocation(req, res) {
   }
 }
 
+function handleReq(req, res) {
+  Let searchVar = req.query.searchVar;
+  Let url = `[extrnal API URL]?key=${API KEY
+}& q=${ city }& `;
+	Let cachedDataSet = {};
+	
+	if (locations[url]) {
+		res.send(locations[url]);
+	} else {
+	  superperagent.get(url)
+		.then(data => {
+		const rawData = data.body-0];
+		const returnData = new ReturnObjectConstructor(searchVar, apiObjectData)
+		cachedDataSet[url] = returnData
+		res.json(returnData);
+	})
+	.catch(() => {
+	  console.error('did not work');
+	})
+    }
+}
+
 function handleWeather(req, res) {
   try {
     let rawWeatherData = require('./data/weather.json');
-    let city = `${req.query.city} 5-day:`;
+    let city = `${ req.query.city } 5 - day: `;
     let array = rawWeatherData.data;
-    // Weather.all = [];
     Weather.all = array.map(object => new Weather(object));
-    // array.forEach(object => {
-    //   Weather.all.push(new Weather(object));
-    // })
-    // let formattedWeatherData = Weather.all.map(value => console.log(value))
-    // let weatherReport = `${city}${Weather.all}`;
+    // let weatherReport = `${ city } ${ Weather.all } `;
     res.send(Weather.all);
     // res.send(weatherReport);
   } catch (error) {
@@ -63,5 +80,5 @@ app.use('*', (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`server up on port ${PORT}`);
+  console.log(`server up on port ${ PORT } `);
 });

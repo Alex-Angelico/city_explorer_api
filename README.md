@@ -104,17 +104,17 @@ Estimate of time needed to complete: 1 hour
 
 Start time: 2:30
 
-Finish time: _____
+Finish time: 2:57
 
-Actual time needed to complete: _____
+Actual time needed to complete: .5 hours
 
 #### Feature 6
 
 Number and name of feature: Locations
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1 hour
 
-Start time: _____
+Start time: 3:00
 
 Finish time: _____
 
