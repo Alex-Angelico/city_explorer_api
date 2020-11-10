@@ -1,9 +1,13 @@
 'use strict';
 
+
+
 const express = require('express');
 const superagent = require('superagent');
 const dotenv = require('dotenv');
 const cors = require('cors');
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT;
