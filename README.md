@@ -116,17 +116,17 @@ Estimate of time needed to complete: 1 hour
 
 Start time: 3:00
 
-Finish time: _____
+Finish time: 4:15
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1 hour 15 minutes
 
 #### Feature 7
 
 Number and name of feature: Weather
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1 hour
 
-Start time: _____
+Start time: 4:48
 
 Finish time: _____
 
