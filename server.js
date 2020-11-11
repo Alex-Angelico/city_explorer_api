@@ -49,7 +49,7 @@ function handleWeather(req, res) {
   } else {
     superagent.get(url)
       .then(data => {
-        const weatherData = data.body[0];
+        const weatherData = data;
         Weather.all = weatherData.map(object => new Weather(object));
         locations[url] = Weather.all;
         res.json(weatherReportData);
