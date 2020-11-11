@@ -10,6 +10,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
+const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
 
 app.use(cors());
 app.use(express.static('./public'));
@@ -39,18 +40,39 @@ function handleLocation(req, res) {
 }
 
 function handleWeather(req, res) {
-  try {
-    let rawWeatherData = require('./data/weather.json');
-    // let city = `${req.query.city} 5 - day: `;
-    let array = rawWeatherData.data;
-    Weather.all = array.map(object => new Weather(object));
-    // let weatherReport = `${ city } ${ Weather.all } `;
-    res.send(Weather.all);
-    // res.send(weatherReport);
-  } catch (error) {
-    console.error(error);
+  let city = req.query.city;
+  let url = `https://api.weatherbit.io/v2.0/current?key=${WEATHER_API_KEY}&q=${city}&format=json&limit=1`;
+  let weatherReports = {};
+
+  if (weatherReports[url]) {
+    res.send(weatherReports[url]);
+  } else {
+    superagent.get(url)
+      .then(data => {
+        const weatherData = data.body[0];
+        Weather.all = weatherData.map(object => new Weather(object));
+        locations[url] = Weather.all;
+        res.json(weatherReportData);
+      })
+      .catch((error) => {
+        console.error(error, 'did not work');
+      })
   }
 }
+
+// function handleWeather(req, res) {
+//   try {
+//     let rawWeatherData = require('./data/weather.json');
+//     // let city = `${req.query.city} 5 - day: `;
+//     let array = rawWeatherData.data;
+//    
+//     // let weatherReport = `${ city } ${ Weather.all } `;
+//     res.send(Weather.all);
+//     // res.send(weatherReport);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
 
 function Location(city, rawLocationData) {
   this.search_query = city;
