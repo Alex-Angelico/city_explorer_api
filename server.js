@@ -41,7 +41,7 @@ function handleLocation(req, res) {
 
 function handleWeather(req, res) {
   let city = req.query.city;
-  let url = `https://api.weatherbit.io/v2.0/current?key=${WEATHER_API_KEY}&q=${city}&format=json&limit=1`;
+  let url = `http://api.weatherbit.io/v2.0/current?key=${WEATHER_API_KEY}&q=${city}&format=json&limit=1`;
   let weatherReports = {};
 
   if (weatherReports[url]) {
