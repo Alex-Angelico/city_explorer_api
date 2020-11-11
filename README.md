@@ -128,15 +128,15 @@ Estimate of time needed to complete: 1 hour
 
 Start time: 4:48
 
-Finish time: _____
+Finish time: 6:50
 
-Actual time needed to complete: _____
+Actual time needed to complete: 2 hours
 
 #### Feature 8
 
 Number and name of feature: Trails
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1 hour
 
 Start time: _____
 
