@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 const express = require('express');
 const superagent = require('superagent');
 const dotenv = require('dotenv');
@@ -47,8 +45,8 @@ function handleLocation(req, res) {
         locations[url] = locationData;
         res.json(locationData);
       })
-      .catch(() => {
-        console.error('did not work');
+      .catch((error) => {
+        console.error(error, 'did not work');
       })
   }
 }
@@ -72,9 +70,9 @@ function handleWeather(req, res) {
 
 function Location(city, rawLocationData) {
   this.search_query = city;
-  this.formatted_query = rawLocationData[0].display_name;
-  this.latitude = rawLocationData[0].lat;
-  this.longitude = rawLocationData[0].lon;
+  this.formatted_query = rawLocationData.display_name;
+  this.latitude = rawLocationData.lat;
+  this.longitude = rawLocationData.lon;
 }
 
 function Weather(object) {
