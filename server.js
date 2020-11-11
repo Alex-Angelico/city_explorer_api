@@ -11,12 +11,14 @@ const app = express();
 const PORT = process.env.PORT;
 const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
+const TRAIL_API_KEY = process.env.TRAIL_API_KEY;
 
 app.use(cors());
 app.use(express.static('./public'));
 
 app.get('/location', handleLocation);
 app.get('/weather', handleWeather);
+app.get('/trails', handleTrails);
 
 function handleLocation(req, res) {
   let city = req.query.city;
@@ -61,6 +63,29 @@ function handleWeather(req, res) {
   }
 }
 
+function handleTrails(req, res) { 
+  let lat = req.query.latitude;
+  let lon = req.query.longitude;
+  let url = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${lon}&key=${TRAIL_API_KEY}&format=json`;
+  let trails = {};
+
+  if (trails[url]) {
+    res.send(trails[url]);
+  } else {
+    superagent.get(url)
+      .then(trails => {
+        const trailData = trails.body;
+        Trail.all = trailData.trails.map(object => new Trail(object));
+        trails[url] = Trail.all;
+        res.json(Trail.all);
+      })
+      .catch((error) => {
+        console.error(error, 'did not work');
+      })
+  }
+}
+
+
 function Location(city, rawLocationData) {
   this.search_query = city;
   this.formatted_query = rawLocationData.display_name;
@@ -71,6 +96,19 @@ function Location(city, rawLocationData) {
 function Weather(object) {
   this.forecast = object.weather.description;
   this.time = object.datetime;
+}
+
+function Trail(object) {
+  this.name = object.name;
+  this.location = object.location;
+  this.length = object.length;
+  this.stars = object.stars;
+  this.star_votes = object.star_votes;
+  this.summary = object.summary;
+  this.trail_url = object.trail_url;
+  this.conditions = object.conditions;
+  this.condition_date = object.condition_date;
+  this.condition_time = object.condition_time;
 }
 
 
