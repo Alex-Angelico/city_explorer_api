@@ -17,19 +17,6 @@ app.use(express.static('./public'));
 app.get('/location', handleLocation);
 app.get('/weather', handleWeather);
 
-
-
-// function handleLocation(req, res) {
-//   try {
-//     let rawLocationData = require('./data/location.json');
-//     let city = req.query.city;
-//     let locationData = new Location(city, rawLocationData);
-//     res.send(locationData);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
 function handleLocation(req, res) {
   let city = req.query.city;
   let url = `http://us1.locationiq.com/v1/search.php?key=${GEOCODE_API_KEY}&q=${city}&format=json&limit=1`;
@@ -64,9 +51,6 @@ function handleWeather(req, res) {
     console.error(error);
   }
 }
-
-// rawDataSearchQuery
-// formattedSearchQuery
 
 function Location(city, rawLocationData) {
   this.search_query = city;
