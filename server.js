@@ -40,8 +40,9 @@ function handleLocation(req, res) {
 }
 
 function handleWeather(req, res) {
-  let city = req.query.city;
-  let url = `http://api.weatherbit.io/v2.0/current?key=${WEATHER_API_KEY}&q=${city}&format=json&limit=1`;
+  let lat = req.query.latitude;
+  let lon = req.query.longitude;
+  let url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${WEATHER_API_KEY}&lat=${lat}&lon=${lon}&days=8&format=json`;
   let weatherReports = {};
 
   if (weatherReports[url]) {
@@ -49,30 +50,16 @@ function handleWeather(req, res) {
   } else {
     superagent.get(url)
       .then(data => {
-        const weatherData = data[0];
-        Weather.all = weatherData.map(object => new Weather(object));
-        locations[url] = Weather.all;
-        res.json(weatherReportData);
+        const weatherData = data.body;
+        Weather.all = weatherData.data.map(object => new Weather(object));
+        weatherReports[url] = Weather.all;
+        res.json(Weather.all);
       })
       .catch((error) => {
         console.error(error, 'did not work');
       })
   }
 }
-
-// function handleWeather(req, res) {
-//   try {
-//     let rawWeatherData = require('./data/weather.json');
-//     // let city = `${req.query.city} 5 - day: `;
-//     let array = rawWeatherData.data;
-//    
-//     // let weatherReport = `${ city } ${ Weather.all } `;
-//     res.send(Weather.all);
-//     // res.send(weatherReport);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
 
 function Location(city, rawLocationData) {
   this.search_query = city;
@@ -88,9 +75,10 @@ function Weather(object) {
 
 
 
-app.use('*', (req, res) => {
+app.use('*', handleNotFound) 
+function handleNotFound(req, res) {
   res.status(500).send('Sorry, something went wrong!');
-})
+}
 
 app.listen(PORT, () => {
   console.log(`server up on port ${PORT} `);
