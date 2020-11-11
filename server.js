@@ -67,9 +67,12 @@ function handleWeather(req, res) {
   }
 }
 
+// rawDataSearchQuery
+// formattedSearchQuery
+
 function Location(city, rawLocationData) {
-  this.rawDataSearchQuery = city;
-  this.formattedSearchQuery = rawLocationData[0].display_name;
+  this.search_query = city;
+  this.formatted_query = rawLocationData[0].display_name;
   this.latitude = rawLocationData[0].lat;
   this.longitude = rawLocationData[0].lon;
 }
