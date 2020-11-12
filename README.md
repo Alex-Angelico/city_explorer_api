@@ -178,9 +178,9 @@ Estimate of time needed to complete: 1 hour
 
 Start time: 5:35
 
-Finish time: _____
+Finish time: 5:50
 
-Actual time needed to complete: _____
+Actual time needed to complete: .25 hours
 
 #### Feature 12
 
