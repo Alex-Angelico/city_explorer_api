@@ -4,6 +4,7 @@ const express = require('express');
 const superagent = require('superagent');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const pg = require('pg');
 
 dotenv.config();
 
@@ -12,6 +13,8 @@ const PORT = process.env.PORT;
 const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
 const TRAIL_API_KEY = process.env.TRAIL_API_KEY;
+
+const client = new pg.Client(process.env.DATABASE_URL);
 
 app.use(cors());
 app.use(express.static('./public'));
@@ -22,23 +25,30 @@ app.get('/trails', handleTrails);
 
 function handleLocation(req, res) {
   let city = req.query.city;
-  let url = `http://us1.locationiq.com/v1/search.php?key=${GEOCODE_API_KEY}&q=${city}&format=json&limit=1`;
-  let locations = {};
+  let dbVerify = `SELECT * FROM locations WHERE search_query = '${city}';`;
 
-  if (locations[url]) {
-    res.send(locations[url]);
-  } else {
-    superagent.get(url)
-      .then(data => {
-        const geoData = data.body[0];
-        const locationData = new Location(city, geoData);
-        locations[url] = locationData;
-        res.json(locationData);
-      })
-      .catch((error) => {
-        console.error(error, 'did not work');
-      })
-  }
+  client.query(dbVerify)
+    .then(data => {
+      if (data.rows.length > 0) {
+        res.json(data.rows[0]);
+      } else {
+        let url = `http://us1.locationiq.com/v1/search.php?key=${GEOCODE_API_KEY}&q=${city}&format=json&limit=1`;
+        superagent.get(url)
+          .then(data => {
+            const geoData = data.body[0];
+            const locationData = new Location(city, geoData);
+            let SQL = 'INSERT INTO locations (search_query, formatted_query, latitude, longitude) VALUES ($1, $2, $3, $4) RETURNING *;';
+            let values = [city, geoData.display_name, geoData.lat, geoData.lon];
+            client.query(SQL, values)
+              .then(() => {
+                res.json(locationData);
+              })
+          })
+          .catch((error) => {
+            console.error(error, 'did not work');
+          })
+      }
+    })
 }
 
 function handleWeather(req, res) {
@@ -63,7 +73,7 @@ function handleWeather(req, res) {
   }
 }
 
-function handleTrails(req, res) { 
+function handleTrails(req, res) {
   let lat = req.query.latitude;
   let lon = req.query.longitude;
   let url = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${lon}&key=${TRAIL_API_KEY}&format=json`;
@@ -113,11 +123,19 @@ function Trail(object) {
 
 
 
-app.use('*', handleNotFound) 
+app.use('*', handleNotFound)
 function handleNotFound(req, res) {
   res.status(500).send('Sorry, something went wrong!');
 }
 
-app.listen(PORT, () => {
-  console.log(`server up on port ${PORT} `);
-});
+client.connect()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`server up!  ${PORT}`);
+    });
+  })
+  .catch(err => console.log(err));
+
+// app.listen(PORT, () => {
+//   console.log(`server up on port ${PORT} `);
+// });

@@ -143,3 +143,53 @@ Start time: 6:55
 Finish time: 7:22
 
 Actual time needed to complete: 30 minutes
+
+### Lab 8
+
+#### Feature 9
+
+Number and name of feature: SQL Database
+
+Estimate of time needed to complete: .5 hour
+
+Start time: 2:15
+
+Finish time: 4:30
+
+Actual time needed to complete: 2.25 hours
+
+#### Feature 10
+
+Number and name of feature: Server
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 4:30
+
+Finish time: 5:30
+
+Actual time needed to complete: 1 hour
+
+#### Feature 11
+
+Number and name of feature: Deployment
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 5:35
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
+#### Feature 12
+
+Number and name of feature: Server Stretch
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
