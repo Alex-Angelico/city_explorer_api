@@ -14,7 +14,7 @@ const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
 const TRAIL_API_KEY = process.env.TRAIL_API_KEY;
 const MOVIE_API_KEY = process.env.MOVIE_API_KEY;
-// const YELP_API_KEY = process.env.YELP_API_KEY;
+const YELP_API_KEY = process.env.YELP_API_KEY;
 
 const client = new pg.Client(process.env.DATABASE_URL);
 
@@ -25,7 +25,7 @@ app.get('/location', handleLocation);
 app.get('/weather', handleWeather);
 app.get('/trails', handleTrails);
 app.get('/movies', handleMovies);
-// app.get('/yelp', handleYelp);
+app.get('/yelp', handleRestaurants);
 
 function handleLocation(req, res) {
   let city = req.query.city;
@@ -120,6 +120,25 @@ function handleMovies(req, res) {
   }
 }
 
+function handleRestaurants(req, res) {
+  let lat = req.query.latitude;
+  let lon = req.query.longitude;
+  const url = `https://api.yelp.com/v3/businesses/search?latitude=${lat}&longitude=${lon}`;
+  
+    superagent.get(url)
+      .set('Authorization', `Bearer ${YELP_API_KEY}`)
+      .then(restaurants => {
+        console.log(restaurants);
+        const restaurantData = restaurants.body.businesses;
+        Restaurant.all = restaurantData.map(object => new Restaurant(object));
+        restaurants[url] = Restaurant.all;
+        res.json(Restaurant.all);
+      })
+      .catch((error) => {
+        console.error(error, 'did not work');
+      })
+  }
+
 
 function Location(city, rawLocationData) {
   this.search_query = city;
@@ -154,6 +173,14 @@ function Movie(object) {
   this.image_url = `https://image.tmdb.org/t/p/w500${object.poster_path}`;
   this.popularity = object.popularity;
   this.released_on = object.released_on;
+}
+
+function Restaurant(object) {
+  this.name = object.name;
+  this.image_url = object.image_url;
+  this.price = object.price;
+  this.rating = object.rating;
+  this.url = object.url;
 }
 
 
