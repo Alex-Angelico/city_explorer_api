@@ -13,6 +13,8 @@ const PORT = process.env.PORT;
 const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
 const TRAIL_API_KEY = process.env.TRAIL_API_KEY;
+const MOVIE_API_KEY = process.env.MOVIE_API_KEY;
+// const YELP_API_KEY = process.env.YELP_API_KEY;
 
 const client = new pg.Client(process.env.DATABASE_URL);
 
@@ -22,6 +24,8 @@ app.use(express.static('./public'));
 app.get('/location', handleLocation);
 app.get('/weather', handleWeather);
 app.get('/trails', handleTrails);
+app.get('/movies', handleMovies);
+// app.get('/yelp', handleYelp);
 
 function handleLocation(req, res) {
   let city = req.query.city;
@@ -95,6 +99,27 @@ function handleTrails(req, res) {
   }
 }
 
+function handleMovies(req, res) {
+  let city = req.query.search_query;
+  let url = `https://api.themoviedb.org/3/search/movie/?api_key=${MOVIE_API_KEY}&query=${city}`;
+  let movies = {};
+
+  if (movies[url]) {
+    res.send(movies[url]);
+  } else {
+    superagent.get(url)
+      .then(movies => {
+        const movieData = movies.body.results;
+        Movie.all = movieData.map(object => new Movie(object));
+        movies[url] = Movie.all;
+        res.json(Movie.all);
+      })
+      .catch((error) => {
+        console.error(error, 'did not work');
+      })
+  }
+}
+
 
 function Location(city, rawLocationData) {
   this.search_query = city;
@@ -121,6 +146,16 @@ function Trail(object) {
   this.condition_time = object.condition_time;
 }
 
+function Movie(object) {
+  this.title = object.title;
+  this.overview = object.overview;
+  this.average_votes = object.average_votes;
+  this.total_votes = object.total_votes;
+  this.image_url = `https://image.tmdb.org/t/p/w500${object.poster_path}`;
+  this.popularity = object.popularity;
+  this.released_on = object.released_on;
+}
+
 
 
 app.use('*', handleNotFound)
@@ -136,6 +171,3 @@ client.connect()
   })
   .catch(err => console.log(err));
 
-// app.listen(PORT, () => {
-//   console.log(`server up on port ${PORT} `);
-// });

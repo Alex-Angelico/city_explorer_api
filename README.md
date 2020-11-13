@@ -193,3 +193,36 @@ Start time: _____
 Finish time: _____
 
 Actual time needed to complete: _____
+#### Feature 13
+
+Number and name of feature: Movies
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 2:25
+
+Finish time: 4:08
+
+Actual time needed to complete: 1.5 hour 
+#### Feature 14
+
+Number and name of feature: Server Stretch
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
+#### Feature 15
+
+Number and name of feature: Server Stretch
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
