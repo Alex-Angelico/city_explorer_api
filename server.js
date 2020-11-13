@@ -124,21 +124,18 @@ function handleRestaurants(req, res) {
   let lat = req.query.latitude;
   let lon = req.query.longitude;
   const url = `https://api.yelp.com/v3/businesses/search?latitude=${lat}&longitude=${lon}`;
-  
-    superagent.get(url)
-      .set('Authorization', `Bearer ${YELP_API_KEY}`)
-      .then(restaurants => {
-        console.log(restaurants);
-        const restaurantData = restaurants.body.businesses;
-        Restaurant.all = restaurantData.map(object => new Restaurant(object));
-        restaurants[url] = Restaurant.all;
-        res.json(Restaurant.all);
-      })
-      .catch((error) => {
-        console.error(error, 'did not work');
-      })
-  }
-
+  superagent.get(url)
+    .set('Authorization', `Bearer ${YELP_API_KEY}`)
+    .then(restaurants => {
+      const restaurantData = restaurants.body.businesses;
+      Restaurant.all = restaurantData.map(object => new Restaurant(object));
+      restaurants[url] = Restaurant.all;
+      res.json(Restaurant.all);
+    })
+    .catch((error) => {
+      console.error(error, 'did not work');
+    })
+}
 
 function Location(city, rawLocationData) {
   this.search_query = city;
@@ -183,8 +180,6 @@ function Restaurant(object) {
   this.url = object.url;
 }
 
-
-
 app.use('*', handleNotFound)
 function handleNotFound(req, res) {
   res.status(500).send('Sorry, something went wrong!');
@@ -197,4 +192,3 @@ client.connect()
     });
   })
   .catch(err => console.log(err));
-
