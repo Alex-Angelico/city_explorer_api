@@ -206,15 +206,15 @@ Finish time: 4:08
 Actual time needed to complete: 1.5 hour 
 #### Feature 14
 
-Number and name of feature: Server Stretch
+Number and name of feature: Yelp
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1.5 hour
 
-Start time: _____
+Start time: 4:35
 
-Finish time: _____
+Finish time: 5:37
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1 hour
 #### Feature 15
 
 Number and name of feature: Server Stretch
